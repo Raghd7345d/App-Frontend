@@ -6,6 +6,7 @@ import { Button, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 
 export default function Camera() {
   //   const { setPromocode, promocode } = useContext(UserProvider);
+  const [scanCompleted, setScanCompleted] = useState(false);
 
   const [facing, setFacing] = useState("back");
   const [permission, requestPermission] = useCameraPermissions();
@@ -27,19 +28,32 @@ export default function Camera() {
     setFacing((current) => (current === "back" ? "front" : "back"));
   }
 
-  //   const handlePromoCode = (code) => {
-  //     setPromocode(code);
-  //   };
+  const handlePromoCode = (code) => {
+    console.log(code);
+    if (code.type === "high-sugar-coders") {
+      // Check if code is valid
+      // send info to backend
+      // setScanCompleted(true);
+    } else {
+      alert("Invalid code");
+    }
+    // setPromocode(code);
+  };
   return (
-    <UserProvider>
-      <View style={styles.container}>
+    <View style={styles.container}>
+      {scanCompleted ? (
+        <>
+          <Text>Scan completed</Text>
+          <Button title="Scan again" onPress={() => setScanCompleted(false)} />
+        </>
+      ) : (
         <CameraView
           style={styles.camera}
           facing={facing}
           barcodeScannerSettings={{
             barcodeTypes: ["qr"],
           }}
-          //   onBarcodeScanned={handlePromoCode}
+          onBarcodeScanned={handlePromoCode}
         >
           <View style={styles.buttonContainer}>
             <TouchableOpacity
@@ -50,8 +64,8 @@ export default function Camera() {
             </TouchableOpacity>
           </View>
         </CameraView>
-      </View>
-    </UserProvider>
+      )}
+    </View>
   );
 }
 

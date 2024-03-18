@@ -1,7 +1,8 @@
 {
   "expo": {
-    "name": "Logo-App",
-    "slug": "Logo-App",
+    "name": "logo-app",
+    "slug": "logo-app",
+    "scheme": "logo-app",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -34,7 +35,6 @@
         }
       ],
       "expo-router"
-    ],
-    "scheme": "your-app-scheme"
+    ]
   }
 }
